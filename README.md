@@ -29,13 +29,15 @@ This repository provides a fully automated Bash script to install and configure 
 
 ## ⚙️ How to Use
 
-1. Download the script:
+Download the script:
 
     curl -O https://raw.githubusercontent.com/devrimerduman/wireguard-autoinstall/main/install-wireguard-wgdashboard.sh
+
 
 Make it executable:
 
     chmod +x install-wireguard-wgdashboard.sh
+
 
 Run the script:
 
@@ -45,6 +47,7 @@ Run the script:
 After installation, access the dashboard in your browser:
 
     http://YOUR_SERVER_IP:10000
+
 
 Login credentials:
 Username and Password
