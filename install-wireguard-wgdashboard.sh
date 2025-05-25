@@ -52,7 +52,7 @@ echo "🌐 Installing WGDashboard..."
 cd /opt
 git clone https://github.com/donaldzou/WGDashboard.git
 cd WGDashboard
-pip3 install -r requirements.txt
+pip3 install --break-system-packages -r requirements.txt
 
 # Step 8: Configure WGDashboard
 cat > config.json <<EOF
