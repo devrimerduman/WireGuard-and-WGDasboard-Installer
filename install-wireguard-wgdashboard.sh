@@ -2,27 +2,26 @@
 
 set -e
 
-echo "🔧 Installing WireGuard and WGDashboard on Debian 12..."
+echo "\U0001F527 Installing WireGuard and WGDashboard with Domain Support on Debian 12..."
 
-# Step 1: Install dependencies
-echo "📦 Installing required packages..."
+# Step 1: Install required packages
+echo "\U0001F4E6 Installing required packages..."
 apt update
-apt install -y wireguard curl iptables-persistent python3 python3-pip git
+apt install -y wireguard iptables-persistent python3 python3-pip git
 
-# Step 2: Generate WireGuard keys
+# Step 2: Create WireGuard keys and configuration
 WG_DIR="/etc/wireguard"
 mkdir -p $WG_DIR
 cd $WG_DIR
 
-echo "🔐 Generating WireGuard private and public keys..."
+echo "\U0001F510 Generating WireGuard keys..."
 umask 077
 wg genkey | tee privatekey | wg pubkey > publickey
 
 PRIVATE_KEY=$(cat privatekey)
 SERVER_IP="10.99.99.1"
 
-# Step 3: Create wg0.conf
-cat > $WG_DIR/wg0.conf <<EOF
+cat > wg0.conf <<EOF
 [Interface]
 Address = $SERVER_IP/24
 ListenPort = 51820
@@ -32,70 +31,75 @@ PostDown = iptables -t nat -D POSTROUTING -s 10.99.99.0/24 -o eth0 -j MASQUERADE
 SaveConfig = true
 EOF
 
-# Step 4: Enable IP forwarding
+# Step 3: Enable IP forwarding
 echo "Enabling IP forwarding..."
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sysctl -p
 
-# Step 5: Configure NAT
-echo "Setting up NAT masquerading..."
+# Step 4: Setup NAT
 iptables -t nat -A POSTROUTING -s 10.99.99.0/24 -o eth0 -j MASQUERADE
 netfilter-persistent save
 
-# Step 6: Enable and start WireGuard
-echo "🚀 Starting WireGuard service..."
+# Step 5: Enable WireGuard
 systemctl enable wg-quick@wg0
-systemctl start wg-quick@wg0
+systemctl start wg-quick@wg0 || {
+    echo "❌ WireGuard service failed to start. Check your wg0.conf and system logs.";
+    exit 1;
+}
 
-# Step 7: Install WGDashboard
-echo "🌐 Installing WGDashboard..."
+# Step 6: Install WGDashboard
 cd /opt
-git clone https://github.com/donaldzou/WGDashboard.git
+rm -rf WGDashboard
+sudo git clone https://github.com/donaldzou/WGDashboard.git
 cd WGDashboard
-pip3 install --break-system-packages -r requirements.txt
 
-# Step 8: Configure WGDashboard
-cat > config.json <<EOF
+# Step 7: Install Python requirements
+REQUIREMENTS_PATH="/opt/WGDashboard/src/requirements.txt"
+if [ ! -f "$REQUIREMENTS_PATH" ]; then
+    echo "❌ ERROR: requirements.txt not found at $REQUIREMENTS_PATH. Repo may have changed. Aborting."
+    exit 1
+fi
+pip3 install --break-system-packages -r "$REQUIREMENTS_PATH"
+
+# Step 8: Create config.json
+mkdir -p /opt/WGDashboard/src
+cat > /opt/WGDashboard/src/config.json <<EOF
 {
-    "wg_conf_path": "/etc/wireguard/wg0.conf",
-    "interface": "wg0",
-    "listen_port": 10000,
-    "username": "admin",
-    "password": "admin"
+  "wg_conf_path": "/etc/wireguard/wg0.conf",
+  "interface": "wg0",
+  "listen_port": 10000,
+  "username": "admin",
+  "password": "admin"
 }
 EOF
 
-# Step 9: Create systemd service for WGDashboard
+# Step 9: Create systemd service
 cat > /etc/systemd/system/wgdashboard.service <<EOF
 [Unit]
 Description=WGDashboard Web UI
 After=network.target
 
 [Service]
-WorkingDirectory=/opt/WGDashboard
-ExecStart=/usr/bin/python3 /opt/WGDashboard/dashboard.py
+WorkingDirectory=/opt/WGDashboard/src
+ExecStart=/usr/bin/python3 /opt/WGDashboard/src/dashboard.py
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
-# Step 10: Enable and start WGDashboard
+# Step 10: Enable and start the dashboard
 systemctl daemon-reexec
 systemctl daemon-reload
 systemctl enable wgdashboard
 systemctl start wgdashboard
 
-# Step 11: Get public IP address
+# Step 11: Output dashboard info
 IPADDR=$(hostname -I | awk '{print $1}')
-
-# Final message
 echo ""
-echo "✅ WireGuard and WGDashboard installation is complete!"
+echo "✅ WireGuard and WGDashboard have been successfully installed!"
+echo "\U0001F30D Access the dashboard at: http://$IPADDR:10000"
+echo "\U0001F512 Login: admin / admin"
 echo ""
-echo "🌍 You can access WGDashboard at:"
-echo "➡️  http://$IPADDR:10000"
-echo ""
-echo "🔐 Default credentials:"
-echo "Username: admin"
-echo "Password: admin"
+echo "⚠️ IMPORTANT:"
+echo "If you plan to use a domain (e.g., vpn.example.com), make sure to create an A record pointing to $IPADDR with Cloudflare Proxy DISABLED (grey cloud)."
