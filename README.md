@@ -73,8 +73,3 @@ Login credentials:
 This script is provided "as is" with no warranty. Use it at your own risk and always review the code before executing on production systems.
 
 Created by Devrimer Duman
-
-
----
-
-Let me know if you want a `LICENSE` file or if you'd like to automatically push this to GitHub via terminal.
