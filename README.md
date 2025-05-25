@@ -50,8 +50,7 @@ After installation, access the dashboard in your browser:
     http://YOUR_SERVER_IP:10086
 
 
-Login credentials:
-Username and Password
+Default Login credentials for Username and Password:
 
     admin
 
