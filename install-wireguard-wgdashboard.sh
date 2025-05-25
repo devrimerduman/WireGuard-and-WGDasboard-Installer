@@ -98,7 +98,7 @@ systemctl start wgdashboard
 IPADDR=$(hostname -I | awk '{print $1}')
 echo ""
 echo "✅ WireGuard and WGDashboard have been successfully installed!"
-echo "\U0001F30D Access the dashboard at: http://$IPADDR:10000"
+echo "\U0001F30D Access the dashboard at: http://$IPADDR:10086"
 echo "\U0001F512 Login: admin / admin"
 echo ""
 echo "⚠️ IMPORTANT:"

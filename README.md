@@ -18,7 +18,8 @@ This repository provides a fully automated Bash script to install and configure 
 - A fresh **Debian 12** system
 - Root access
 - An internet connection
-- Ports `51820/UDP` and `10000/TCP` open on your firewall/router
+- Ports `51820/UDP` and `10086/TCP` open on your firewall/router
+- If you plan to use a domain (e.g., vpn.example.com), make sure to create an A record pointing to YOUR_SERVER_IP with Cloudflare Proxy DISABLED (grey cloud).
 
 ## 📦 What It Installs
 
@@ -46,7 +47,7 @@ Run the script:
 
 After installation, access the dashboard in your browser:
 
-    http://YOUR_SERVER_IP:10000
+    http://YOUR_SERVER_IP:10086
 
 
 Login credentials:
