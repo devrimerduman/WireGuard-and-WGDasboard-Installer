@@ -43,7 +43,7 @@ sudo ./install-wireguard-wgdashboard.sh
 
     After installation, access the dashboard in your browser:
 
-http://<your-server-ip>:10000
+http://YOUR_SERVER_IP:10000
 
 Login credentials:
 Username and Password
