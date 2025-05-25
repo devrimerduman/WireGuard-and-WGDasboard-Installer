@@ -47,6 +47,7 @@ http://<your-server-ip>:10000
 
 Login credentials:
 Username and Password
+
     admin
 
 🔐 Notes
