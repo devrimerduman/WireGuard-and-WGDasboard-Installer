@@ -56,7 +56,7 @@ Username and Password
     admin
 
 
-🔐 Notes
+## 🔐 Notes
 
 By default, the WireGuard server uses 10.99.99.1/24.
 
@@ -65,14 +65,14 @@ You can change the ListenPort, credentials, or dashboard port in the config.json
 The dashboard runs as a systemd service named wgdashboard.
 
 
-📚 Resources
+## 📚 Resources
 
 WireGuard Quickstart
 
 WGDashboard GitHub
 
 
-🛑 Disclaimer
+## 🛑 Disclaimer
 
 This script is provided "as is" with no warranty. Use it at your own risk and always review the code before executing on production systems.
 
