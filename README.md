@@ -31,24 +31,26 @@ This repository provides a fully automated Bash script to install and configure 
 
 1. Download the script:
 
-curl -O https://raw.githubusercontent.com/devrimerduman/wireguard-autoinstall/main/install-wireguard-wgdashboard.sh
+    curl -O https://raw.githubusercontent.com/devrimerduman/wireguard-autoinstall/main/install-wireguard-wgdashboard.sh
 
-    Make it executable:
+Make it executable:
 
-chmod +x install-wireguard-wgdashboard.sh
+    chmod +x install-wireguard-wgdashboard.sh
 
-    Run the script:
+Run the script:
 
-sudo ./install-wireguard-wgdashboard.sh
+    sudo ./install-wireguard-wgdashboard.sh
 
-    After installation, access the dashboard in your browser:
 
-http://YOUR_SERVER_IP:10000
+After installation, access the dashboard in your browser:
+
+    http://YOUR_SERVER_IP:10000
 
 Login credentials:
 Username and Password
 
     admin
+
 
 🔐 Notes
 
@@ -58,11 +60,13 @@ Username and Password
 
     The dashboard runs as a systemd service named wgdashboard.
 
+
 📚 Resources
 
     WireGuard Quickstart
 
     WGDashboard GitHub
+
 
 🛑 Disclaimer
 
