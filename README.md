@@ -46,10 +46,8 @@ sudo ./install-wireguard-wgdashboard.sh
 http://<your-server-ip>:10000
 
 Login credentials:
-
-    Username: admin
-
-    Password: admin
+Username and Password
+    admin
 
 🔐 Notes
 
