@@ -1,4 +1,4 @@
-star✅ README.md
+✅ README.md
 
 # WireGuard + WGDashboard Auto Installer for Debian 12
 
