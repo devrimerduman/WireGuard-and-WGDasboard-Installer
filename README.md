@@ -76,3 +76,8 @@ WGDashboard GitHub
 This script is provided "as is" with no warranty. Use it at your own risk and always review the code before executing on production systems.
 
 Created by Devrimer Duman
+
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=devrimerduman/WireGuard-and-WGDasboard-Installer&type=Date)](https://www.star-history.com/#devrimerduman/WireGuard-and-WGDasboard-Installer&Date)
