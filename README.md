@@ -1,4 +1,4 @@
-✅ README.md
+star✅ README.md
 
 # WireGuard + WGDashboard Auto Installer for Debian 12
 
@@ -78,6 +78,6 @@ This script is provided "as is" with no warranty. Use it at your own risk and al
 Created by Devrimer Duman
 
 
-## Star History
+## ⭐️ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=devrimerduman/WireGuard-and-WGDasboard-Installer&type=Date)](https://www.star-history.com/#devrimerduman/WireGuard-and-WGDasboard-Installer&Date)
